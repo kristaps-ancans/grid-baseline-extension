@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Grid and baseline</title>
+    <style>
+        html{
+            background:gray}
+        body{
+            background:#f2f2f2;
+            height:1200px;
+            margin:0 auto;
+            width:960px}
+        #fyfi-nav{
+            background:#000;
+            border:1px solid #f00;
+            border-radius:5px;
+            list-style:none;
+            margin:0;
+            padding:10px;
+            right:5px;
+            top:5px;
+            position:fixed}
+            #fyfi-nav li{
+                border:1px solid #f00;
+                border-radius:3px;
+                height:25px;
+                margin:0 0 3px;
+                overflow:hidden;
+                text-indent:-999em;
+                width:25px}
+        #fyfi-grid{
+            background:url(960_grid_12_col.png) center;
+            opacity:0.6;
+            position:absolute;
+            top:0;
+            width:960px}
+        #fyfi-showGrid,#fyfi-showBaseline{
+            background:green}
+        #fyfi-hideGrid,#fyfi-hideBaseline{
+            background:blue;
+            display:none}
+        #fyfi-baselineHeight{
+            display:none}
+        #fyfi-baseline{
+            background-image:-webkit-linear-gradient(#000 1px, transparent 1px);
+            background-size:100% 18px;
+            opacity:0.3;
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%}
+    </style>
+</head>
+<body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script>
+        var app = function () {
+            var config, elm, elmH, nav, grid, gridOuter, gridSize, needGuidelines, baseline, baselineSize;
+            config = {
+                gridSize: '12',
+                baselineSize: _loadData['baseline-size'] || '18'
+            };
+
+            elm = $('body');
+            elmH = elm.outerHeight();
+
+            function _createNav() {
+                nav = $('<div id="fyfi-nav"><ul><li id="fyfi-showGrid">Show Grid</li><li id="fyfi-hideGrid">Hide Grid</li><li id="fyfi-showBaseline">Show Baseline</li><li id="fyfi-hideBaseline">Show Baseline</li></ul><select id="fyfi-baselineHeight"><option>18</option><option>20</option><option>22</option><option>24</option><option>26</option><option>28</option><option>30</option></selected></div>');
+                nav.prependTo(elm);
+                _bindActions();
+            };
+
+            function _bindActions() {
+                var createGrid = $('#fyfi-showGrid');
+                var hideGrid = $('#fyfi-hideGrid');
+                var createBaseline = $('#fyfi-showBaseline');
+                var hideBaseline = $('#fyfi-hideBaseline');
+                var baselineHeight = $('#fyfi-baselineHeight');
+                createGrid.bind('click', function () {
+                    createGrid.hide();
+                    hideGrid.show();
+                    _createGrid('', false);
+                });
+
+                hideGrid.bind('click', function () {
+                    hideGrid.hide();
+                    createGrid.show();
+                    _destroyGrid();
+                });
+
+                createBaseline.bind('click', function () {
+                    createBaseline.hide();
+                    hideBaseline.show();
+                    baselineHeight.show();
+                    _createBaseline();
+                });
+
+                hideBaseline.bind('click', function () {
+                    hideBaseline.hide();
+                    baselineHeight.hide();
+                    createBaseline.show();
+                    _destroyBaseline();
+                });
+
+                baselineHeight.bind('change', function () {
+                    var val = $(this).val();
+                    console.log(val);
+                    baseline.css('background-size', '100% ' + val + 'px');
+                    _saveData('baseline-size', val);
+
+                });
+            }
+
+            function _saveData(param, data) {
+                localStorage[param] = data;
+            }
+
+            function _loadData(param) {
+                localStorage[param];
+            }
+
+            function _deleteData(param) {
+                localStorage.removeItem(param);
+            }
+
+            function _createGrid(gridSize, needGuidelines) {
+                gridSize = gridSize || config.gridSize;
+                grid = $('<div id="fyfi-grid" class="grid' + gridSize + '" style="height:' + elmH + 'px" />');
+                if (needGuidelines == true) {
+                    guidelines = null || gridSize;
+                    grid.addClass('guidelines' + gridSize);
+                }
+                grid.prependTo(elm);
+            };
+
+            function _destroyGrid() {
+                grid.remove();
+            };
+
+            function _createBaseline(baselineSize) {
+                baselineSize = baselineSize || config.baselineSize;
+                baseline = $('<div id="fyfi-baseline" class="baseline' + baselineSize + '" style="height:' + elmH + 'px" />');
+                baseline.prependTo(elm);
+            };
+
+            function _destroyBaseline() {
+                baseline.remove();
+            };
+
+            return {
+                nav: function () {
+                    _createNav();
+                }
+            };
+        }
+        app().nav();
+    </script>
+</body>
+</html>

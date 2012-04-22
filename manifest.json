@@ -1,0 +1,21 @@
+{
+   "background_page": "background.html",
+   "browser_action": {
+      "default_icon": "logo.png",
+      "default_title": "Web Dev Helper"
+   },
+   "content_scripts": [ {
+      "js": [ "common.js", "jquery-1.7.1.min.js" ],
+      "css": ["main.css"],
+      "matches": [ "http://*/*" ]
+   } ],
+   "description": "Grid and baseline extension",
+   "icons": {
+      "128": "icon128.png",
+      "16": "icon16.png",
+      "48": "icon48.png"
+   },
+   "name": "Web Dev Helper",
+   "permissions": [ "tabs", "http://*/*" ],
+   "version": "0.1"
+}
