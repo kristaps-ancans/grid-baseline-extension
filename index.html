@@ -10,25 +10,31 @@
             padding:0;
         }
         html,body{
+            background:orange url(Hosting_Design_for_sale_by_pSHR.jpg) center top no-repeat;
             height:100%;
             min-height:100%;
+            position:relative;
+            height:1400px;
         }
-        iframe{
-            height:100%;
-            width:100%;
+        .wrp{
+            border:5px solid rgba(255,255,255,0.3);
+            border-right:0;
+            border-radius:3px;
+            right:0;
+            top:5px;
+            position:fixed;
+            border-top-right-radius:0;
+            border-bottom-right-radius:0;
         }
         #fyfi-nav{
-            background: linear-gradient(to bottom, #4f4f4f 0%,#2d2d2d 43%,#313131 100%);
-            box-shadow:1px 1px 1px #000;
+            background:linear-gradient(to bottom, #4f4f4f 0%,#2d2d2d 43%,#313131 100%);
+            border-right:0;
             border-radius:3px;
             border-top-right-radius:0;
             border-bottom-right-radius:0;
             list-style:none;
             margin:0;
-            padding:10px;
-            right:0;
-            top:5px;
-            position:fixed}
+            padding:10px;}
             #fyfi-nav li{
                 border:1px solid #f00;
                 border-radius:3px;
@@ -38,11 +44,12 @@
                 text-indent:-999em;
                 width:25px}
         #fyfi-grid{
-            background:url(960_grid_12_col.png) center no-repeat;
+            background:url(960_grid_12_col.png) center top repeat-y;
             opacity:0.6;
             position:fixed;
             top:0;
-            margin:auto;
+            left:0;
+            margin:0 auto;
             width:100%}
         #fyfi-showGrid,#fyfi-showBaseline{
             background:green}
@@ -75,7 +82,7 @@
             elmH = elm.outerHeight();
 
             function _createNav() {
-                nav = $('<div id="fyfi-nav"><ul><li id="fyfi-showGrid">Show Grid</li><li id="fyfi-hideGrid">Hide Grid</li><li id="fyfi-showBaseline">Show Baseline</li><li id="fyfi-hideBaseline">Show Baseline</li></ul><select id="fyfi-baselineHeight"><option>18</option><option>20</option><option>22</option><option>24</option><option>26</option><option>28</option><option>30</option></selected></div>');
+                nav = $('<div class="wrp"><div id="fyfi-nav"><ul><li id="fyfi-showGrid">Show Grid</li><li id="fyfi-hideGrid">Hide Grid</li><li id="fyfi-showBaseline">Show Baseline</li><select id="fyfi-baselineHeight"><option>18</option><option>20</option><option>22</option><option>24</option><option>26</option><option>28</option><option>30</option></select><li id="fyfi-hideBaseline">Show Baseline</li></ul></div></div>');
                 nav.prependTo(elm);
                 _bindActions();
             };
@@ -165,6 +172,5 @@
         }
         app().nav();
     </script>
-    <iframe src="http://reddit.com"></iframe>
 </body>
 </html>
