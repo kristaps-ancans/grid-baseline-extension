@@ -4,21 +4,29 @@
     <meta charset="utf-8">
     <title>Grid and baseline</title>
     <style>
-        html{
-            background:gray}
-        body{
-            background:#f2f2f2;
-            height:1200px;
-            margin:0 auto;
-            width:960px}
+        *{
+            border:0;
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            height:100%;
+            min-height:100%;
+        }
+        iframe{
+            height:100%;
+            width:100%;
+        }
         #fyfi-nav{
-            background:#000;
-            border:1px solid #f00;
-            border-radius:5px;
+            background: linear-gradient(to bottom, #4f4f4f 0%,#2d2d2d 43%,#313131 100%);
+            box-shadow:1px 1px 1px #000;
+            border-radius:3px;
+            border-top-right-radius:0;
+            border-bottom-right-radius:0;
             list-style:none;
             margin:0;
             padding:10px;
-            right:5px;
+            right:0;
             top:5px;
             position:fixed}
             #fyfi-nav li{
@@ -30,11 +38,12 @@
                 text-indent:-999em;
                 width:25px}
         #fyfi-grid{
-            background:url(960_grid_12_col.png) center;
+            background:url(960_grid_12_col.png) center no-repeat;
             opacity:0.6;
-            position:absolute;
+            position:fixed;
             top:0;
-            width:960px}
+            margin:auto;
+            width:100%}
         #fyfi-showGrid,#fyfi-showBaseline{
             background:green}
         #fyfi-hideGrid,#fyfi-hideBaseline{
@@ -156,5 +165,6 @@
         }
         app().nav();
     </script>
+    <iframe src="http://reddit.com"></iframe>
 </body>
 </html>
